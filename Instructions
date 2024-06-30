@@ -1,0 +1,54 @@
+Step 1: Install Node.js v18.x
+
+1. Before you begin, ensure that curl is installed on your system. If curl is not installed, you can install it using the following command:
+sudo yum install -y curl
+
+2. Download the Node.js setup script:
+curl -fsSL https://rpm.nodesource.com/setup_18.x -o nodesource_setup.sh
+
+3. Run the Node.js setup script as root:
+sudo bash nodesource_setup.sh
+
+4. Install Node.js:
+sudo yum install -y nodejs
+
+5. Verify the installation:
+node -v
+
+6. Install additional dependencies
+sudo yum install -y gcc-c++ make net-tools python2 python3
+
+7. Install build tools
+sudo yum groupinstall -y 'Development Tools'
+
+8. Test node is working
+node -v
+
+
+Step 2: Install Homebridge and Homebridge UI
+
+1. Install Homebridge and the Homebridge UI using the following command:
+sudo npm install -g --unsafe-perm homebridge homebridge-config-ui-x
+
+2. To setup Homebridge as a service that will start on boot you can use the provided hb-service command.
+sudo hb-service install --user homebridge
+
+This command will do everything that is required to setup Homebridge and the Homebridge UI as a service on your system, it will create the homebridge user if it does not already exist, and create the default Homebridge config.json under /var/lib/homebridge if it does not already exist.
+
+When setting up Homebridge as a service using this command, the UI will stay online even if Homebridge is crashing due to a bad plugin or configuration error.
+
+You should also add the Homebridge port, available from the Config tab once you login to the Homebridge UI.
+
+Step 3: Login to the Homebridge UI
+
+The Homebridge UI web interface will allow you to install, remove and update plugins, and modify the Homebridge config.json and manage other aspects of your Homebridge service.
+
+Login to the web interface by going to http://<ip address of your server>:8581.
+
+To find the IP address of your server you can run:
+
+hostname -I
+
+
+
+Takes from https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Red-Hat%2C-CentOS-or-Fedora-Linux
